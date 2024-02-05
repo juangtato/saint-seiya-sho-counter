@@ -1,0 +1,9 @@
+<div class="counter">
+  <button type="button" (click)="update(1)" class="upper-button">
+    <mat-icon>add</mat-icon>
+  </button>
+  <input type="number" [formControl]="counterControl" class="text-center" />
+  <button type="button" (click)="update(-1)" class="lower-button">
+    <mat-icon>remove</mat-icon>
+  </button>
+</div>

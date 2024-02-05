@@ -1,1 +1,180 @@
-/* You can add global styles to this file, and also import other style files */
+//@import './scss/theme/main';
+
+:root {
+  --border-color: black;
+  --border-size: 2px;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+app-root {
+  min-height: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  app-player-board {
+    display: block;
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+    border-collapse: collapse;
+
+
+    &:first-child {
+      background-color: lightblue;
+      border-bottom: 1px solid lightgray;
+    }
+
+    &:last-child {
+      background-color: lightyellow;
+      border-top: 1px solid lightgray;
+    }
+
+    &>app-vertical-counter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      flex-basis: 50%;
+      box-sizing: border-box;
+
+      .counter {
+        width: 10vw;
+        justify-content: center;
+        //margin: 0 8vw;
+
+        * {
+          box-sizing: border-box;
+          width: 100%;
+        }
+
+        input {
+          height: 3rem;
+          border-width: 0 var(--border-size);
+          border-color: var(--border-color);
+          padding: 0px;
+          margin: 0px;
+          text-align: center;
+          font-weight: bolder;
+          font-size: 1.5rem;
+          line-height: 1.5rem;
+
+          &.ng-invalid {
+            background-color: darkred;
+          }
+        }
+
+        button {
+          height: 3rem;
+          cursor: pointer;
+          border: var(--border-size) solid var(--border-color);
+        }
+      }
+    }
+  }
+
+  &.portrait {
+    app-player-board {
+
+      flex-wrap: wrap;
+
+      &>app-vertical-counter {
+        .counter {
+          width: 24vw;
+
+          input {
+            height: 2rem;
+          }
+
+          button {
+            height: 2rem;
+          }
+        }
+      }
+    }
+  }
+
+  &.rotatedBoard>app-player-board:first-child {
+    transform: rotate(180deg);
+  }
+}
+
+
+app-vertical-counter {
+  .counter {
+    .upper-button {
+      border-top-right-radius: 50%;
+      border-top-left-radius: 50%;
+    }
+
+    .lower-button {
+      border-bottom-left-radius: 50%;
+      border-bottom-right-radius: 50%;
+    }
+  }
+}
+
+@mixin rounded-button {
+  border: lightgray 3px solid;
+  border-radius: 50%;
+  background-color: gray;
+  box-sizing: border-box;
+
+  position: fixed;
+  height: 3rem;
+  width: 3rem;
+  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+}
+
+.rounded-reset-button {
+  @include rounded-button;
+  top: 50%;
+  margin-top: -1.5rem;
+  left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.rounded-d6-button {
+  @include rounded-button;
+  top: 50%;
+  margin-top: -1.5rem;
+  right: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.rounded-rotate-button {
+  @include rounded-button;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

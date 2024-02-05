@@ -1,0 +1,25 @@
+:host {
+  &.life {
+    button {
+      background-color: #e4221f;
+    }
+  }
+
+  &.cosmo {
+    button {
+      background-color: #9c65a7;
+    }
+  }
+
+  &.armor {
+    button {
+      background-color: #fdd50c;
+    }
+  }
+
+  &.depletion {
+    button {
+      background-color: #eb5c1c;
+    }
+  }
+}
