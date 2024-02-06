@@ -3,6 +3,7 @@ import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Gameplay } from './model/gameplay';
 import { GameplayFormGroup } from './model/gameplay-form';
+import { AwakeService } from './service/awake.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AppService {
   private readonly gameplayStoreKey = 'sss-gameplay';
   private readonly rotatedBoardKey = 'sss-rotatedBoard';
 
-  private nfb = inject(NonNullableFormBuilder)
+  private nfb = inject(NonNullableFormBuilder);
+  private awakeService = inject(AwakeService);
 
   gameplayForm(destroyRef: DestroyRef): GameplayFormGroup {
     const result = this.nfb.group({
@@ -29,6 +31,7 @@ export class AppService {
         if (result.valid) {
           this.saveGameplay(result.getRawValue());
         }
+        this.awakeService.lock();
       }
     );
     return result;

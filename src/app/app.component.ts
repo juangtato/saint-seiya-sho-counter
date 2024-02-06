@@ -12,11 +12,15 @@ import { PlayerBoardComponent } from './components/player-board/player-board.com
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
+import { AwakeService } from './service/awake.service';
+import { AsyncPipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    AsyncPipe,
     RouterOutlet,
     MatIconModule,
     PlayerBoardComponent
@@ -29,7 +33,7 @@ export class AppComponent implements OnInit {
 
   private destroyRef = inject(DestroyRef);
   private appService = inject(AppService);
-  private breakpointObserver = inject(BreakpointObserver)
+  private breakpointObserver = inject(BreakpointObserver);
 
   @HostBinding('class.portrait')
   portraitMode = false;
@@ -38,6 +42,7 @@ export class AppComponent implements OnInit {
   rotated = this.appService.isRotated();
 
   form = this.appService.gameplayForm(this.destroyRef);
+  keepAlive$ =  inject(AwakeService).keepAlive$
 
   ngOnInit(): void {
     this.breakpointObserver.observe([

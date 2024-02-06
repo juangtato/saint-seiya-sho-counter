@@ -4,3 +4,17 @@
 <button (click)="reset()" class="rounded-reset-button"><mat-icon>delete</mat-icon></button>
 <button (click)="toggleRotated()" class="rounded-rotate-button"><mat-icon>restart_alt</mat-icon></button>
 <button (click)="d6()" class="rounded-d6-button"><mat-icon>casino</mat-icon></button>
+
+@if (keepAlive$ | async ; as awakeState) {
+
+<span class="rounded-keep-alive" [class]="awakeState">
+  @if (awakeState === 'error') {
+  E
+  } @else if (awakeState === 'active') {
+  K
+  } @else {
+  ?
+  }
+</span>
+
+}
